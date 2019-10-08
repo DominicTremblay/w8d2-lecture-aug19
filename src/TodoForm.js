@@ -1,10 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-const TodoForm = ({id, task, completed}) => {
+const TodoForm = ({addTodo}) => {
+  
+  const [text, setText] = useState('');
+  
+  const handleSubmit = event => {
+    event.preventDefault();
+    addTodo(text);
+    setText('');
+  }
+
+
   return (
-    <form>
+    <form onSubmit={handleSubmit} >
       <div className="form-group">
-        <input type="text" className="form-control" id="todo-input" placeholder="Enter a todo" value={task} completed={completed}/>
+        <input type="text" onChange={event => setText(event.target.value)} autoFocus className="form-control" id="todo-input" placeholder="Enter a todo" value={text} />
       </div>
 
     </form>
